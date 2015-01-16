@@ -12,9 +12,8 @@ while(cap.isOpened()):
     blur = cv2.GaussianBlur(gray,(5,5),0)
     # blur2 = cv2.GaussianBlur(gray,(5,5),0)
 
-    ret, thresh1 = cv2.threshold(blur,70,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    ret, thresh1 = cv2.threshold(blur,200,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
     # ret, thresh2 = cv2.threshold(blur2,70,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
-
     drawing = np.zeros(img.shape,np.uint8)
 
     contours, hierarchy = cv2.findContours(thresh1,cv2.RETR_TREE,cv2.CHAIN_APPROX_NONE)
@@ -30,8 +29,8 @@ while(cap.isOpened()):
             ci=i
     cnt=contours[ci]
     hull = cv2.convexHull(cnt)
-    #import pdb
-    #pdb.set_trace()
+    import pdb
+    pdb.set_trace()
     moments = cv2.moments(cnt)
     if moments['m00']!=0:
         cx = int(moments['m10']/moments['m00']) # cx = M10/M00
@@ -60,7 +59,7 @@ while(cap.isOpened()):
     cv2.drawContours(drawing,[hull],0,(0,0,255),2) 
           
     cnt = cv2.approxPolyDP(cnt,0.01*cv2.arcLength(cnt,True),True)
-    hull = cv2.convexHull(cnt,returnPoints = False)
+    hull = cv2.convexHull(cnt, returnPoints = False)
     
     if(1):
         defects = cv2.convexityDefects(cnt,hull)
