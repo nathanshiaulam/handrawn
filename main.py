@@ -20,6 +20,7 @@ while(cap.isOpened()):
     # import pdb
     # pdb.set_trace()
 
+    # Draws the contours based off of area
     max_area=0
     for i in range(len(contours)):
         cnt=contours[i]
@@ -29,13 +30,14 @@ while(cap.isOpened()):
             ci=i
     cnt=contours[ci]
     hull = cv2.convexHull(cnt)
-    import pdb
-    pdb.set_trace()
+
+    # Finds the center of the image
     moments = cv2.moments(cnt)
     if moments['m00']!=0:
         cx = int(moments['m10']/moments['m00']) # cx = M10/M00
         cy = int(moments['m01']/moments['m00']) # cy = M01/M00
 
+    # Provides us with the top of the convex hull
     max_hull = 10000
     hull_index = -1
     for i in xrange(len(hull)):
@@ -44,6 +46,8 @@ while(cap.isOpened()):
             hull_index = i
 
     hull_center = (int(hull[hull_index][0][0]), int(hull[hull_index][0][1]))
+
+    # Draws lines in between the tops of the finger
     points.append(hull_center)
     for idx, center in enumerate(points):
         if center == points[0]:
@@ -52,7 +56,7 @@ while(cap.isOpened()):
             other_center = points[idx-1]
             cv2.line(drawing, center, other_center, [255,0,0], thickness=1,  lineType=8)
 
-
+    # Draws the contours and the circle 
     centr=(cx,cy)       
     cv2.circle(drawing,centr,5,[0,0,255],2)     
     cv2.drawContours(drawing,[cnt],0,(0,255,0),2) 
@@ -61,6 +65,7 @@ while(cap.isOpened()):
     cnt = cv2.approxPolyDP(cnt,0.01*cv2.arcLength(cnt,True),True)
     hull = cv2.convexHull(cnt, returnPoints = False)
     
+    # Detects defects. Need to do more research on understanding this
     if(1):
         defects = cv2.convexityDefects(cnt,hull)
         mind=0
