@@ -4,16 +4,16 @@ cap = cv2.VideoCapture(0)
 points = []
 while(cap.isOpened()):
     ret, img = cap.read()
-    ret, img2 = cap.read()
+    # ret, img2 = cap.read()
 
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    gray2 = cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY)
+    # gray2 = cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY)
 
     blur = cv2.GaussianBlur(gray,(5,5),0)
-    blur2 = cv2.GaussianBlur(gray,(5,5),0)
+    # blur2 = cv2.GaussianBlur(gray,(5,5),0)
 
-    ret, thresh1 = cv2.threshold(blur,127,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
-    ret, thresh2 = cv2.threshold(blur2,70,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    ret, thresh1 = cv2.threshold(blur,70,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    # ret, thresh2 = cv2.threshold(blur2,70,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
 
     drawing = np.zeros(img.shape,np.uint8)
 
@@ -46,8 +46,13 @@ while(cap.isOpened()):
 
     hull_center = (int(hull[hull_index][0][0]), int(hull[hull_index][0][1]))
     points.append(hull_center)
-    for center in points:
-        cv2.circle(drawing, center, 1, (255,0,0),2)
+    for idx, center in enumerate(points):
+        if center == points[0]:
+            cv2.circle(drawing, center, 1, (255,0,0), 2)
+        else:
+            other_center = points[idx-1]
+            cv2.line(drawing, center, other_center, [255,0,0], thickness=1,  lineType=8)
+
 
     centr=(cx,cy)       
     cv2.circle(drawing,centr,5,[0,0,255],2)     
