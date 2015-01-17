@@ -12,7 +12,7 @@ while(cap.isOpened()):
     blur = cv2.GaussianBlur(gray,(5,5),0)
     # blur2 = cv2.GaussianBlur(gray,(5,5),0)
 
-    ret, thresh1 = cv2.threshold(blur,200,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    ret, thresh1 = cv2.threshold(blur,70,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
     # ret, thresh2 = cv2.threshold(blur2,70,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
     drawing = np.zeros(img.shape,np.uint8)
 
@@ -27,6 +27,7 @@ while(cap.isOpened()):
         area = cv2.contourArea(cnt)
         if(area>max_area):
             max_area=area
+            print area
             ci=i
     cnt=contours[ci]
     hull = cv2.convexHull(cnt)
