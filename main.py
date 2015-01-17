@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from msvcrt import getch
+import threading
 cap = cv2.VideoCapture(0)
 points = []
 while(cap.isOpened()):
@@ -22,7 +23,7 @@ while(cap.isOpened()):
 	# pdb.set_trace()
 
 	# # Draw on/off square
-	cv2.rectangle(drawing,(525,25),(600,100),(0,255,0),2)
+	#cv2.rectangle(drawing,(525,25),(600,100),(0,255,0),2)
 	# isDrawing = False
 
 	# key = chr(ord(getch()))
@@ -58,13 +59,15 @@ while(cap.isOpened()):
 
 	# Draws lines in between the tops of the finger
 	points.append(hull_center)
-	for idx, center in enumerate(points):
-		# if key == 'd':
-		if center == points[0]:
-			cv2.circle(drawing, center, 1, (255,0,0), 2)
-		else:
-			other_center = points[idx-1]
-			cv2.line(drawing, center, other_center, [255,0,0], thickness=1,  lineType=8)
+	drawSwitch = cv2.waitKey(10)
+
+	if drawSwitch == ord('d'):
+		for idx, center in enumerate(points):
+			if center == points[0]:
+				cv2.circle(drawing, center, 1, (255,0,0), 2)
+			else:
+				other_center = points[idx-1]
+				cv2.line(drawing, center, other_center, [255,0,0], thickness=1,  lineType=8)
 
 	# Draws the contours and the circle 
 	centr=(cx,cy)       
