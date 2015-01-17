@@ -57,7 +57,7 @@ while(cap.isOpened()):
 
 	hull_center = (int(hull[hull_index][0][0]), int(hull[hull_index][0][1]))
 
-	# Draws lines in between the tops of the finger
+	# Draws lines in between the tops of the finger if d key is pressed
 	points.append(hull_center)
 	drawSwitch = cv2.waitKey(10)
 
@@ -95,6 +95,11 @@ while(cap.isOpened()):
 			print(i)
 			i=0
 	cv2.imshow('output',drawing)
+	clearButton = cv2.waitKey(10)
+	if clearButton == ord('r'):
+		print "reset"
+		cv2.destroyAllWindows()
+		drawing = np.zeros(img.shape,np.uint8)
 	# cv2.imshow('input',img)        
 	k = cv2.waitKey(10)
 	if k == 27:
