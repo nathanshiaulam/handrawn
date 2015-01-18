@@ -5,6 +5,7 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route("/")
+
 def showVideo():
     points = []
     point_set = []
@@ -72,6 +73,7 @@ def showVideo():
         start = 0;
         if draw == 1:
             point_set.append((int(cx),int(cy)))
+            print "no"
         else:
             point_set = []
 
@@ -86,10 +88,12 @@ def showVideo():
             # if center not in erase_set: 
                 if center == point_set[0]:
                     cv2.circle(drawing, center, 1, (red,green,blue), 2)
+                    print "start point" + str(center)
                     marker = 0
                 else:
                     other_center = point_set[idx-1]
                     cv2.line(drawing, center, other_center, [red,green,blue], thickness=2,  lineType=8)
+                    print "from" + str(center) + "to" + str(other_center)
 
 
         for set_of_points in points:
