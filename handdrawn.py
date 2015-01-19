@@ -6,8 +6,8 @@ cap = cv2.VideoCapture(0)
 # take first frame of the video
 ret,frame = cap.read()
 
-drawing = np.zeros((len(frame), len(frame[0]), 3))
-#drawing = frame
+drawing = np.zeros_like(frame)
+
 state = 0 #0 do nothing, 1 draw, 2 erase
 prevpoint = [];
 currpoint = [];
@@ -70,7 +70,8 @@ while(1):
     if ret == True:
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         filtered = cv2.inRange(hsv,MIN,MAX)
-       
+        cv2.imshow("Tracker", filtered)
+
         moments = cv2.moments(filtered)
         if moments['m00']!=0:
             cx = int(moments['m10']/moments['m00']) # cx = M10/M00
@@ -79,20 +80,19 @@ while(1):
             cx = -1
             cy = -1
 
-    if cx is not -1:
-        currpoint = (int(cx),int(cy))
-        if state == 1:
-            if (prevpoint == []):
-                cv2.circle(drawing, currpoint, 1, rgb, 2)
-            else:
-                cv2.line(drawing, prevpoint, currpoint, rgb, thickness=2,  lineType=8)
-            prevpoint = currpoint
-        elif state == 2:
-            if (prevpoint == []):
-                cv2.circle(drawing, currpoint, 1, (0,0,0), 2)
-            else:
-                cv2.line(drawing, prevpoint, currpoint, [0,0,0], thickness=10,  lineType=8)
-            prevpoint = currpoint
+    currpoint = (int(cx),int(cy))
+    if state == 1:
+        if (prevpoint == []):
+            cv2.circle(drawing, currpoint, 1, rgb, 2)
+        else:
+            cv2.line(drawing, prevpoint, currpoint, rgb, thickness=2,  lineType=8)
+        prevpoint = currpoint
+    elif state == 2:
+        if (prevpoint == []):
+            cv2.circle(drawing, currpoint, 1, (0,0,0), 2)
+        else:
+            cv2.line(drawing, prevpoint, currpoint, [0,0,0], thickness=10,  lineType=8)
+        prevpoint = currpoint
 
     #add marker
     drawing2 = drawing.copy()
@@ -108,8 +108,8 @@ while(1):
             state = 0
         prevpoint = []
     elif k == ord('r'):
-        drawing = np.zeros((len(frame), len(frame[0]), 3))
-        #drawing = frame  
+        drawing = np.zeros_like(frame)
+        drawing = frame  
         prevpoint = []
     elif k == ord('e'):
         if state == 2:
