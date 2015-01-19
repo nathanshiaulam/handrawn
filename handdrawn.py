@@ -109,7 +109,6 @@ while(1):
         prevpoint = []
     elif k == ord('r'):
         drawing = np.zeros_like(frame)
-        drawing = frame  
         prevpoint = []
     elif k == ord('e'):
         if state == 2:
