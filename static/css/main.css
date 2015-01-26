@@ -1,12 +1,26 @@
 @import url('bootstrap.min.css');
 
+.top{
+	margin-bottom: 15vh;
+} 
+
 #header {
 	text-align: center;
 	vertical-align: middle;
 	display: block;
-	margin-top: 35vh;
+	margin-top: 10vh;
 	color: #22313F;
 }
+
+#guide {
+	color: #22313F;
+	display: block;
+}
+
+#guide h3 {
+	text-align: center;
+}
+
 button{
 	text-align: center;
 }

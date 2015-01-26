@@ -80,7 +80,12 @@ def showVideo():
         frame = cv2.flip(frame,1)
         if ret == True:
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            filtered = cv2.inRange(hsv,MIN,MAX)
+            # Find someway to threshold the concentration of pixels as well so that
+            # if the threshold size does not reach a certain percentage of the screen
+            # size (probably 1/40 so that it doesn't pick up single pixels in the 
+            # background) it stops drawing, the tracker disappears, and it prompts
+            # the user to reapproximate the thresholding value before continuing.
+            filtered = cv2.inRange(hsv,MIN,MAX) 
             cv2.imshow("Tracker", filtered)
 
             moments = cv2.moments(filtered)
