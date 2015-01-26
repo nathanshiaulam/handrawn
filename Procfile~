@@ -1,0 +1,1 @@
+web: gunicorn handdrawn:app --log-file=-
