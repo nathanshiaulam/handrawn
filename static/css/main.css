@@ -1,8 +1,5 @@
 @import url('bootstrap.min.css');
 
-.top{
-	margin-bottom: 15vh;
-} 
 
 #header {
 	text-align: center;
@@ -12,13 +9,14 @@
 	color: #22313F;
 }
 
-#guide {
+.guide-box {
+	padding-left: 20%;
+	padding-right: 20%;
+	margin-bottom: 10vh;
+}
+.guide {
 	color: #22313F;
 	display: block;
-}
-
-#guide h3 {
-	text-align: center;
 }
 
 button{
