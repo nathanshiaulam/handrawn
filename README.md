@@ -1,6 +1,6 @@
 # ColorMyScreen
 
-# Requirements
+## Requirements
 
 Before running the application, make sure you install all of the application's dependencies with the command below:
 
@@ -8,7 +8,7 @@ Before running the application, make sure you install all of the application's d
 pip install -r requirements.txt
 ```
 
-# Running the App
+## Running the App
 
 To run the application, run the command below:
 
