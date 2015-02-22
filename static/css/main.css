@@ -1,12 +1,21 @@
 @import url('bootstrap.min.css');
 
+#wrapper {
+  background: no-repeat center right fixed url(colorscreen.png);
+  background-size: cover;
+  height: 100vh;
+}
 
+.overlay {
+	background-color: rgba(0, 0, 0, .2);
+	height: 100vh;
+}
 #header {
 	text-align: center;
 	vertical-align: middle;
 	display: block;
 	margin-top: 10vh;
-	color: #22313F;
+	color: white;
 }
 
 .guide-box {
@@ -15,7 +24,7 @@
 	margin-bottom: 10vh;
 }
 .guide {
-	color: #22313F;
+	color: white;
 	display: block;
 }
 
