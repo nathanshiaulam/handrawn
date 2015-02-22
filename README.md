@@ -1,6 +1,10 @@
 # ColorMyScreen
 
-# Requirements
+## Description
+
+This was a fun little project my friends and I put together for our computer vision project. We used a motion tracking algorithm with thresholding via OpenCV to create an app that allows you to draw on your screen with an object and webcam. The algorithm averages out the pixels in our tracking box to determine what object should be tracked and what color is used when drawing. 
+
+## Requirements
 
 Before running the application, make sure you install all of the application's dependencies with the command below:
 
@@ -8,7 +12,7 @@ Before running the application, make sure you install all of the application's d
 pip install -r requirements.txt
 ```
 
-# Running the App
+## Running the App
 
 To run the application, run the command below:
 
